@@ -1,0 +1,138 @@
+/* --- CSS Reset --- */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0px;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+pre {
+    margin: 0px;
+    font-size: 10px;
+}
+
+a {
+    color: #FF0000;
+}
+
+/* --- Typography --- */
+
+.grid p {
+  line-height: 15px;
+  font-size: 13px;
+  font-weight: light;
+  padding-bottom: 15px;
+  font-family: 'Kreon', Book Antiqua, Palatino, serif;
+}
+
+.grid h1 {
+  line-height: 80px;
+  font-size: 64px;
+  font-family: 'Kreon', Book Antiqua, Palatino, serif;
+  font-weight: bold;
+}
+
+.grid h2 {
+  line-height: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Kreon', Book Antiqua, Palatino, serif;
+}
+
+.grid h3 {
+  line-height: 30px;
+  font-size: 16px;
+  font-family: 'Kreon', Book Antiqua, Palatino, serif;
+}
+
+.grid h4 {
+  line-height: 30px;
+  font-size: 16px;
+  font-family: 'Kreon', Book Antiqua, Palatino, serif;
+}
+
+.grid h5 {
+  line-height: 30px;
+  font-size: 16px;
+  font-family: 'Kreon', Book Antiqua, Palatino, serif;
+}
+
+.grid h6 {
+  line-height: 30px;
+  font-size: 9px;
+  font-weight: light;
+  font-family: 'Kreon', Book Antiqua, Palatino, serif;
+}
+
+/* --- Grid --- */
+
+.grid {
+  width: 989px;
+  margin: auto;
+}
+
+.grid-m1 {
+  float: left;
+  width: 22px;
+  height: 1px;
+}
+
+.grid-c1 {
+  float: left;
+  width: 173px;
+}
+
+.grid-m2 {
+  float: left;
+  width: 20px;
+  height: 1px;
+}
+
+.grid-c2 {
+  float: left;
+  width: 173px;
+}
+
+.grid-m3 {
+  float: left;
+  width: 20px;
+  height: 1px;
+}
+
+.grid-c3 {
+  float: left;
+  width: 173px;
+}
+
+.grid-m4 {
+  float: left;
+  width: 20px;
+  height: 1px;
+}
+
+.grid-c4 {
+  float: left;
+  width: 173px;
+}
+
+.grid-m5 {
+  float: left;
+  width: 20px;
+  height: 1px;
+}
+
+.grid-c5 {
+  float: left;
+  width: 173px;
+}
+
