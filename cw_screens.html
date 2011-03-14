@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+  <link href='http://fonts.googleapis.com/css?family=Kreon:light,regular,bold' rel='stylesheet' type='text/css'>
+
+
+
+  <title>Craftwerk - Examples</title>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7324603-6']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+ 
+  </script>
+</head>
+
+<body>
+<div style="margin-top:40px;"></div>
+<div class="grid">
+  <div class="grid-m1"></div>
+  <div class="grid-c1" style="margin-bottom:40px;">
+    <h1><a href="craftwerk.html"><span style="color: red;">Craft</span>werk </a>  </h1>
+  </div>
+
+  <div class="grid-m2"></div>
+  <div class="grid-c2">
+    &nbsp;
+  </div>
+  <div class="grid-m3"></div>
+  <div class="grid-c3">
+    &nbsp;
+  </div>
+  <div class="grid-m4"></div>
+  <div class="grid-c4">
+    &nbsp;
+  </div>
+  <div class="grid-m5"></div>
+  <div class="grid-c5">
+    <img src="craftwerk.png" class="" alt="" />
+  </div>
+
+  <br style="clear:both" />
+  <div class="grid-m1"></div>
+  <div class="grid-c1">
+
+
+    <h2>Example GTK + Cairo output</h2>
+    <p>
+      <img src="example_gtk_1.png" class="" alt="" /></p>
+      <pre>
+module Main where
+
+import Graphics.Craftwerk.Core
+import Graphics.Craftwerk.UI
+import Graphics.Craftwerk.Core.Driver.Cairo
+
+import qualified Data.Map as Map
+
+main = 
+  do displayMultiple 
+       ([ ("Iteration", RangeOption 1 6 1 1)
+        , ("Color", ChoiceOption ["red"
+                                 ,"green"
+                                 ,"blue"] 0)])
+       $
+       [ ("Iterator", 
+          renderFigure 1 1
+          (\opt -> return $
+                   colorStyle (choice $ opt Map.! "Color") $
+                   iterations
+                   (round $ value (opt Map.! "Iteration"))
+                   triangle
+          ))]
+
+triangle = line [(0,0),(0,1),(1,0)]
+
+colorStyle col = style newStyle { closePath = yes
+                                , fillColor =
+                                  Just $ [red,green,blue] !!
+                                  col
+                                , stroke = no
+                                , fill = yes}
+
+iterations :: Int -> Figure -> Figure
+iterations 0 f = f
+iterations i f =
+  let nf = iterations (i-1) f
+  in scale (0.5,0.5) $ composition
+     [
+       translate (0,1) $ nf
+     , translate (0,0) $ nf
+     , translate (1,0) $ nf
+     ]
+
+</pre>
+    
+    <h2>Example of TikZ output</h2>
+    <p>
+      <img src="example_tikz.png" class="" alt="" /></p>
+      <pre>
+module Main where
+
+import Graphics.Craftwerk.Core
+
+-- A simple example that displays lines of differend widths
+main = putStrLn . figureToTikzPicture
+       $ style newStyle { closePath = no
+                        , stroke = yes }
+       $ composition
+       [
+         line [(3,0.5),(3,5)]
+       , testlines
+       , style newStyle { arrowTips = arrow (<=>)} $
+         translate (0,0.5) $ testlines
+       ]
+       
+testlines = 
+  composition 
+  [ style (setLineWidth verythin) $ line [(1,1),(5,1)]
+  , style (setLineWidth thin) $ line [(1,2),(5,2)]
+  , style (setLineWidth semithick) $ line [(1,3),(5,3)]
+  , style (setLineWidth thick) $ line [(1,4),(5,4)]
+  ]
+
+</pre>
+<p>
+and the resulting TikZ code
+</p>
+<pre>
+\begin{tikzpicture}[line cap=butt,line join=miter,miter limit=10.0,line width=1.0,dash phase=0.0,solid]
+\definecolor{linec}{rgb}{0.00,0.00,0.00}
+\definecolor{fillc}{rgb}{1.00,1.00,1.00}
+\path[draw=linec] (3.0,0.5)  -- (3.0,5.0) ;
+\begin{scope}[line width=0.2]
+\path[draw=linec] (1.0,1.0)  -- (5.0,1.0) ;
+\end{scope}
+\begin{scope}[line width=0.4]
+\path[draw=linec] (1.0,2.0)  -- (5.0,2.0) ;
+\end{scope}
+\begin{scope}[line width=0.6]
+\path[draw=linec] (1.0,3.0)  -- (5.0,3.0) ;
+\end{scope}
+\begin{scope}[line width=0.8]
+\path[draw=linec] (1.0,4.0)  -- (5.0,4.0) ;
+\end{scope}
+\begin{scope}[xshift=0.0cm,yshift=0.5cm]
+\begin{scope}[line width=0.2]
+\path[<->,draw=linec] (1.0,1.0)  -- (5.0,1.0) ;
+\end{scope}
+\begin{scope}[line width=0.4]
+\path[<->,draw=linec] (1.0,2.0)  -- (5.0,2.0) ;
+\end{scope}
+\begin{scope}[line width=0.6]
+\path[<->,draw=linec] (1.0,3.0)  -- (5.0,3.0) ;
+\end{scope}
+\begin{scope}[line width=0.8]
+\path[<->,draw=linec] (1.0,4.0)  -- (5.0,4.0) ;
+\end{scope}
+\end{scope}
+\end{tikzpicture}
+</pre>
+    
+  </div>
+
+  <br style="clear:both" />
+  <div class="grid-m3"></div>
+  <div class="grid-c3">
+    <h6> &copy 2011 Malte Harder </h6>
+  </div>
+</div>
+
+</body>
+
+</html>
